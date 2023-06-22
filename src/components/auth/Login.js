@@ -11,7 +11,7 @@ const Login = () => {
                 <Col className="col-xs-10 col-md-8 pt-5">
                     <h3>Sign in</h3>
                     <p style={{ fontWeight: 600 }}>
-                        Do not have an account? <a href="/register">Sign up</a>
+                        Do not have an account? <a href="/auth/register">Sign up</a>
                     </p>
                     <br />
                     <br />
@@ -19,24 +19,22 @@ const Login = () => {
                         <Row>
                             <Col md={12}>
                                 <FormGroup>
-                                    <Label for="exampleEmail">Email</Label>
+                                    <Label for="Email">Email</Label>
                                     <Input
-                                        id="exampleEmail"
+                                        id="Email"
                                         name="email"
-                                        placeholder="with a placeholder"
+                                        placeholder=""
                                         type="email"
                                     />
                                 </FormGroup>
                             </Col>
                             <Col md={12}>
                                 <FormGroup>
-                                    <Label for="examplePassword">
-                                        Password
-                                    </Label>
+                                    <Label for="Password">Password</Label>
                                     <Input
-                                        id="examplePassword"
+                                        id="Password"
                                         name="password"
-                                        placeholder="password placeholder"
+                                        placeholder=""
                                         type="password"
                                     />
                                 </FormGroup>
@@ -44,17 +42,19 @@ const Login = () => {
                         </Row>
                         <Row>
                             <Col md={12}>
-                                <AuthButton />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <GoogleButton />
+                                <AuthButton type="LOGIN" />
                             </Col>
                         </Row>
                     </Form>
                 </Col>
             </Row>
+            <Social>
+                <Row>
+                    <Col md={12}>
+                        <GoogleButton />
+                    </Col>
+                </Row>
+            </Social>
         </Wrapper>
     );
 };
@@ -63,6 +63,12 @@ const Wrapper = styled.div`
     h3 {
         font-weight: bold;
     }
+`;
+
+const Social = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
 `;
 
 export default Login;

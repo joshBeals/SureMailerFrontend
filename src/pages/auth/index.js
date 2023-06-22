@@ -4,6 +4,19 @@ import Login from "../../components/auth/Login";
 import Register from "../../components/auth/Register";
 
 const AuthPage = () => {
+
+    const [auth, setAuth] = useState('');
+
+    const path = window.location.pathname.split("/").slice(-1)[0];
+
+    useEffect(() => {
+        if (path == 'register') {
+            setAuth('register');
+        } else {
+            setAuth('login');
+        }
+    },[]);
+
     return (
         <Wrapper>
             <Container className="row">
@@ -21,7 +34,7 @@ const AuthPage = () => {
                     <Testimonials></Testimonials>
                 </LeftFlex>
                 <RightFlex className="col-xs-12 col-md-6 col-lg-8">
-                    <Login />
+                    { auth === 'register' ? <Register /> : <Login />}
                 </RightFlex>
             </Container>
         </Wrapper>

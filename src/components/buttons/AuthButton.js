@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const AuthButton = () => {
+const AuthButton = ({ type }) => {
     return (
         <Wrapper>
-            <p>Login with google</p>
+            <p>{type}</p>
         </Wrapper>
     );
 };
@@ -12,17 +12,24 @@ const AuthButton = () => {
 const Wrapper = styled.div`
     width: 100%;
     padding: 1rem;
-    border: 1px solid black;
+    background: var(--background-primary);
     border-radius: .3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    transition: 300ms ease-in-out;
 
     p {
         font-weight: 600;
         font-size: 1rem;
         margin: 0; padding: 0;
+        color: var(--text);
+    }
+
+    &:hover {
+        // transform: scale(1.02);
+        background: var(--background-primary-dark);
     }
 `;
 
