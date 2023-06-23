@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { Col, Form, Row } from "reactstrap";
 import styled from "styled-components";
-import GoogleButton from 'react-google-button';
+import GoogleButton from "react-google-button";
 import AuthButton from "../buttons/AuthButton";
+import MyInput from "../form/Input";
 
 const Login = () => {
     return (
@@ -11,33 +12,30 @@ const Login = () => {
                 <Col className="col-xs-10 col-md-8 pt-5">
                     <h3>Sign in</h3>
                     <p style={{ fontWeight: 600 }}>
-                        Do not have an account? <a href="/auth/register">Sign up</a>
+                        Do not have an account?{" "}
+                        <a href="/auth/register">Sign up</a>
                     </p>
                     <br />
                     <br />
                     <Form>
                         <Row>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="Email">Email</Label>
-                                    <Input
-                                        id="Email"
-                                        name="email"
-                                        placeholder=""
-                                        type="email"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="Email"
+                                    id="email"
+                                    name="email"
+                                    placeholder=""
+                                    type="email"
+                                />
                             </Col>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="Password">Password</Label>
-                                    <Input
-                                        id="Password"
-                                        name="password"
-                                        placeholder=""
-                                        type="password"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="Password"
+                                    id="password"
+                                    name="password"
+                                    placeholder=""
+                                    type="password"
+                                />
                             </Col>
                         </Row>
                         <Row>

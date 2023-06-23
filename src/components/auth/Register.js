@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import GoogleButton from "react-google-button";
-import { Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { Col, Form, Row } from "reactstrap";
 import styled from "styled-components";
 import AuthButton from "../buttons/AuthButton";
+import MyInput from "../form/Input";
 
 const Register = () => {
     return (
@@ -11,59 +12,50 @@ const Register = () => {
                 <Col className="col-xs-10 col-md-8 pt-5">
                     <h3>Sign up</h3>
                     <p style={{ fontWeight: 600 }}>
-                        Already have an account? <a href="/auth/login">Sign in</a>
+                        Already have an account?{" "}
+                        <a href="/auth/login">Sign in</a>
                     </p>
                     <br />
                     <br />
                     <Form>
                         <Row>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="firstname">First Name</Label>
-                                    <Input
-                                        id="firstname"
-                                        name="firstname"
-                                        placeholder=""
-                                        type="text"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="First Name"
+                                    id="firstname"
+                                    name="firstname"
+                                    placeholder=""
+                                    type="text"
+                                />
                             </Col>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="lastname">Last Name</Label>
-                                    <Input
-                                        id="lastname"
-                                        name="lastname"
-                                        placeholder=""
-                                        type="text"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="Last Name"
+                                    id="lastname"
+                                    name="lastname"
+                                    placeholder=""
+                                    type="text"
+                                />
                             </Col>
                         </Row>
                         <Row>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="Email">Email</Label>
-                                    <Input
-                                        id="Email"
-                                        name="email"
-                                        placeholder=""
-                                        type="email"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="Email"
+                                    id="email"
+                                    name="email"
+                                    placeholder=""
+                                    type="email"
+                                />
                             </Col>
                             <Col md={12}>
-                                <FormGroup>
-                                    <Label for="Password">
-                                        Password
-                                    </Label>
-                                    <Input
-                                        id="Password"
-                                        name="password"
-                                        placeholder=""
-                                        type="password"
-                                    />
-                                </FormGroup>
+                                <MyInput
+                                    label="Password"
+                                    id="password"
+                                    name="password"
+                                    placeholder=""
+                                    type="password"
+                                />
                             </Col>
                         </Row>
                         <Row>
@@ -74,11 +66,11 @@ const Register = () => {
                     </Form>
                 </Col>
             </Row>
-            
+
             <Social>
                 <Row>
                     <Col md={12}>
-                        <GoogleButton label='Sign up with Google' />
+                        <GoogleButton label="Sign up with Google" />
                     </Col>
                 </Row>
             </Social>
