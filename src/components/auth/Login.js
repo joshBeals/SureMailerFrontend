@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
-import { Col, Form, Row } from "reactstrap";
+import { Col, Input, Row } from "reactstrap";
 import styled from "styled-components";
 import GoogleButton from "react-google-button";
 import AuthButton from "../buttons/AuthButton";
 import MyInput from "../form/Input";
+import { FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+    const methods = useForm();
+
+    const onSubmit = methods.handleSubmit((data) => {
+        console.log(data);
+    });
+
     return (
         <Wrapper>
             <Row className="d-flex justify-content-center">
@@ -17,33 +25,38 @@ const Login = () => {
                     </p>
                     <br />
                     <br />
-                    <Form>
-                        <Row>
-                            <Col md={12}>
-                                <MyInput
-                                    label="Email"
-                                    id="email"
-                                    name="email"
-                                    placeholder=""
-                                    type="email"
-                                />
-                            </Col>
-                            <Col md={12}>
-                                <MyInput
-                                    label="Password"
-                                    id="password"
-                                    name="password"
-                                    placeholder=""
-                                    type="password"
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <AuthButton type="LOGIN" />
-                            </Col>
-                        </Row>
-                    </Form>
+                    <FormProvider {...methods}>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <Row>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="Email"
+                                        id="email"
+                                        name="email"
+                                        placeholder=""
+                                        type="email"
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="Password"
+                                        id="password"
+                                        name="password"
+                                        placeholder=""
+                                        type="password"
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={12}>
+                                    <AuthButton
+                                        action={onSubmit}
+                                        type="LOGIN"
+                                    />
+                                </Col>
+                            </Row>
+                        </form>
+                    </FormProvider>
                 </Col>
             </Row>
             <Social>

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const AuthButton = ({ type }) => {
+const AuthButton = ({ type, action }) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={action}>
             <p>{type}</p>
         </Wrapper>
     );

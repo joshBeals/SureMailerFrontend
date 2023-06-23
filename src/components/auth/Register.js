@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import GoogleButton from "react-google-button";
-import { Col, Form, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import styled from "styled-components";
 import AuthButton from "../buttons/AuthButton";
 import MyInput from "../form/Input";
+import { FormProvider, useForm } from "react-hook-form";
 
 const Register = () => {
+    const methods = useForm();
+
+    const onSubmit = methods.handleSubmit((data) => {
+        console.log(data);
+    });
+
     return (
         <Wrapper>
             <Row className="d-flex justify-content-center">
@@ -17,53 +24,58 @@ const Register = () => {
                     </p>
                     <br />
                     <br />
-                    <Form>
-                        <Row>
-                            <Col md={12}>
-                                <MyInput
-                                    label="First Name"
-                                    id="firstname"
-                                    name="firstname"
-                                    placeholder=""
-                                    type="text"
-                                />
-                            </Col>
-                            <Col md={12}>
-                                <MyInput
-                                    label="Last Name"
-                                    id="lastname"
-                                    name="lastname"
-                                    placeholder=""
-                                    type="text"
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <MyInput
-                                    label="Email"
-                                    id="email"
-                                    name="email"
-                                    placeholder=""
-                                    type="email"
-                                />
-                            </Col>
-                            <Col md={12}>
-                                <MyInput
-                                    label="Password"
-                                    id="password"
-                                    name="password"
-                                    placeholder=""
-                                    type="password"
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <AuthButton type="REGISTER" />
-                            </Col>
-                        </Row>
-                    </Form>
+                    <FormProvider {...methods}>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <Row>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="First Name"
+                                        id="firstname"
+                                        name="firstname"
+                                        placeholder=""
+                                        type="text"
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="Last Name"
+                                        id="lastname"
+                                        name="lastname"
+                                        placeholder=""
+                                        type="text"
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="Email"
+                                        id="email"
+                                        name="email"
+                                        placeholder=""
+                                        type="email"
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <MyInput
+                                        label="Password"
+                                        id="password"
+                                        name="password"
+                                        placeholder=""
+                                        type="password"
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={12}>
+                                    <AuthButton
+                                        action={onSubmit}
+                                        type="REGISTER"
+                                    />
+                                </Col>
+                            </Row>
+                        </form>
+                    </FormProvider>
                 </Col>
             </Row>
 
