@@ -71,6 +71,7 @@ const Login = () => {
 };
 
 const Wrapper = styled.div`
+width: 100%;
     h3 {
         font-weight: bold;
     }

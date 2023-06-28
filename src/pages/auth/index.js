@@ -20,7 +20,7 @@ const AuthPage = () => {
     return (
         <Wrapper>
             <Container className="row">
-                <LeftFlex className="col-xs-0 col-md-6 col-lg-4">
+                <LeftFlex className="col-xs-0 col-md-6 col-lg-6">
                     <Logo>SUREMAILER</Logo>
                     <Heading>
                         <h3 className="h3">
@@ -33,7 +33,7 @@ const AuthPage = () => {
                     </Heading>
                     <Testimonials></Testimonials>
                 </LeftFlex>
-                <RightFlex className="col-xs-12 col-md-6 col-lg-8">
+                <RightFlex className="col-xs-12 col-md-6 col-lg-6">
                     { auth === 'register' ? <Register /> : <Login />}
                 </RightFlex>
             </Container>
@@ -54,7 +54,6 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     background: var(--background);
-    padding: 2rem;
 `;
 
 const LeftFlex = styled.div`
@@ -62,7 +61,6 @@ const LeftFlex = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background: var(--background-primary);
-    border-radius: 1rem;
     padding: 2.5rem;
 `;
 
@@ -95,6 +93,9 @@ const Testimonials = styled.div`
 `;
 
 const RightFlex = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     h3 {
         font-weight: bold;
     }
