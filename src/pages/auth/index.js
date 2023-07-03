@@ -10,7 +10,7 @@ const AuthPage = () => {
     const path = window.location.pathname.split("/").slice(-1)[0];
 
     useEffect(() => {
-        if (path == 'register') {
+        if (path === 'register') {
             setAuth('register');
         } else {
             setAuth('login');

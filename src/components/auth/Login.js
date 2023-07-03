@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Input, Row } from "reactstrap";
 import styled from "styled-components";
 import GoogleButton from "react-google-button";
@@ -6,12 +7,53 @@ import AuthButton from "../buttons/AuthButton";
 import MyInput from "../form/Input";
 import { FormProvider } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { setUser } from "../../redux/reducers/userReducer";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [serverError, setServerError] = useState(null);
+    const [apiData, setApiData] = useState({});
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const methods = useForm();
 
+    const url = "http://localhost:5000/auth/login";
+    const headers = {
+        "Content-Type": "application/json",
+    };
+
+    const fetchData = async (data) => {
+        setIsLoading(true);
+        try {
+            axios
+                .post(url, data, { headers })
+                .then((response) => {
+                    console.log(response?.data);
+                    setApiData(response?.data);
+                    setIsLoading(false);
+                    toast.success("Login Successful!");
+                    dispatch(setUser(response?.data));
+                    navigate("/");
+                })
+                .catch((error) => {
+                    console.error(error?.response?.data);
+                    setServerError(error?.response?.data);
+                    setIsLoading(false);
+                    toast.error(error?.response?.data?.error);
+                });
+        } catch (error) {
+            setServerError(error);
+            setIsLoading(false);
+        }
+    };
+
     const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
+        fetchData(data);
     });
 
     return (
@@ -50,6 +92,7 @@ const Login = () => {
                             <Row>
                                 <Col md={12}>
                                     <AuthButton
+                                        loading={isLoading}
                                         action={onSubmit}
                                         type="LOGIN"
                                     />
