@@ -34,9 +34,9 @@ const MyInput = ({ label, name, type, id, placeholder }) => {
                     />
                 )}
             />
-            {/* {errors[name]?.type === "required" && (
-                <p role="alert">{name} is required</p>
-            )} */}
+            {errors[name]?.type === "required" && (
+                <p className="text-danger">{label} is required</p>
+            )}
         </FormGroup>
     );
 };

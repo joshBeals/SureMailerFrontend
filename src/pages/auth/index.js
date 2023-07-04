@@ -62,6 +62,10 @@ const LeftFlex = styled.div`
     justify-content: space-between;
     background: var(--background-primary);
     padding: 2.5rem;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const Logo = styled.h3`
@@ -98,6 +102,10 @@ const RightFlex = styled.div`
     align-items: center;
     h3 {
         font-weight: bold;
+    }
+    
+    @media (max-width: 768px) {
+        padding: 2rem;
     }
 `;
 

@@ -1,17 +1,71 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import GoogleButton from "react-google-button";
 import { Col, Row } from "reactstrap";
 import styled from "styled-components";
 import AuthButton from "../buttons/AuthButton";
 import MyInput from "../form/Input";
 import { FormProvider, useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { setUser } from "../../redux/reducers/userReducer";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [serverError, setServerError] = useState(null);
+    const [apiData, setApiData] = useState({});
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const methods = useForm();
 
+    const url = `${process.env.REACT_APP_BACKEND_URL}/auth/register`;
+    const headers = {
+        "Content-Type": "application/json",
+    };
+
+    const fetchData = async (data) => {
+        setIsLoading(true);
+        try {
+            axios
+                .post(url, data, { headers })
+                .then((response) => {
+                    console.log(response?.data);
+                    setApiData(response?.data);
+                    setIsLoading(false);
+                    toast.success("Registration Successful!", {
+                        toastId: 'success',
+                    });
+                    dispatch(setUser(response?.data));
+                    localStorage.setItem("token", response?.data?.token);
+                    navigate("/dashboard");
+                })
+                .catch((error) => {
+                    console.error(error?.response?.data);
+                    setServerError(error?.response?.data);
+                    setIsLoading(false);
+                    toast.error(error?.response?.data?.error, {
+                        toastId: 'failure',
+                    });
+                });
+        } catch (error) {
+            setServerError(error);
+            setIsLoading(false);
+            toast.error("Something went wrong!", {
+                toastId: 'failure',
+            });
+        }
+    };
+
     const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
+        fetchData(data);
     });
+
+    const googleAuth = () => {
+        window.location.replace(`${process.env.REACT_APP_BACKEND_URL}/auth/google`);
+    };
 
     return (
         <Wrapper>
@@ -69,6 +123,7 @@ const Register = () => {
                             <Row>
                                 <Col md={12}>
                                     <AuthButton
+                                        loading={isLoading}
                                         action={onSubmit}
                                         type="REGISTER"
                                     />
@@ -82,7 +137,7 @@ const Register = () => {
             <Social>
                 <Row>
                     <Col md={12}>
-                        <GoogleButton label="Sign up with Google" />
+                        <GoogleButton onClick={googleAuth} label="Sign up with Google" />
                     </Col>
                 </Row>
             </Social>
