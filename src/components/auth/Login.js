@@ -22,7 +22,7 @@ const Login = () => {
 
     const methods = useForm();
 
-    const url = "http://localhost:5000/auth/login";
+    const url = `${process.env.REACT_APP_BACKEND_URL}/auth/login`;
     const headers = {
         "Content-Type": "application/json",
     };
@@ -36,25 +36,37 @@ const Login = () => {
                     console.log(response?.data);
                     setApiData(response?.data);
                     setIsLoading(false);
-                    toast.success("Login Successful!");
+                    toast.success("Login Successful!", {
+                        toastId: 'success',
+                    });
                     dispatch(setUser(response?.data));
-                    navigate("/");
+                    localStorage.setItem("token", response?.data?.token);
+                    navigate("/dashboard");
                 })
                 .catch((error) => {
                     console.error(error?.response?.data);
                     setServerError(error?.response?.data);
                     setIsLoading(false);
-                    toast.error(error?.response?.data?.error);
+                    toast.error(error?.response?.data?.error, {
+                        toastId: 'failure',
+                    });
                 });
         } catch (error) {
             setServerError(error);
             setIsLoading(false);
+            toast.error("Something went wrong!", {
+                toastId: 'failure',
+            });
         }
     };
 
     const onSubmit = methods.handleSubmit((data) => {
         fetchData(data);
     });
+
+    const googleAuth = () => {
+        window.location.replace(`${process.env.REACT_APP_BACKEND_URL}/auth/google`);
+    };
 
     return (
         <Wrapper>
@@ -105,7 +117,7 @@ const Login = () => {
             <Social>
                 <Row>
                     <Col md={12}>
-                        <GoogleButton />
+                        <GoogleButton onClick={googleAuth} />
                     </Col>
                 </Row>
             </Social>

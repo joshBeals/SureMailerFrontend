@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home";
 import AuthPage from "./pages/auth";
 import { ToastContainer } from "react-toastify";
+import Dashboard from "./pages/dashboard";
+import GoogleSuccess from "./pages/auth/GoogleSuccess";
+import GoogleFailure from "./pages/auth/GoogleFailure";
 
 const App = () => {
     return (
@@ -23,6 +26,9 @@ const App = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/auth/login" element={<AuthPage />} />
                     <Route path="/auth/register" element={<AuthPage />} />
+                    <Route path="/auth/success" element={<GoogleSuccess />} />
+                    <Route path="/auth/failure" element={<GoogleFailure />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </BrowserRouter>
         </div>
